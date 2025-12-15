@@ -1,9 +1,16 @@
 
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Calculator, Sparkles, TrendingUp, Zap } from "lucide-react"
 import Link from "next/link"
+import { useSettings } from "@/components/providers/SettingsProvider"
+import { translations, LanguageCode } from "@/lib/translations"
 
 export function HeroSection() {
+  const { language } = useSettings()
+  const t = translations[language.code as LanguageCode] || translations.en
+
   return (
     <section className="relative w-full py-16 sm:py-20 md:py-32 overflow-hidden" aria-labelledby="hero-heading">
       {/* Background Effects */}
@@ -23,16 +30,12 @@ export function HeroSection() {
 
           {/* Heading */}
           <h1 id="hero-heading" className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight animate-fadeInUp leading-tight px-2 sm:px-0">
-            All Your Calculations in{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-pink-500 animate-shimmer inline-block">
-              One Place
-            </span>
+            {t.hero.title}
           </h1>
 
           {/* Description */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl animate-fadeInUp leading-relaxed px-4 sm:px-0" style={{ animationDelay: "0.1s" }}>
-            Access a comprehensive collection of <strong className="font-semibold text-foreground">300+ calculators</strong> for finance, health, math, and more. 
-            Fast, accurate, and completely free.
+            {t.hero.subtitle}
           </p>
 
           {/* CTA Buttons */}
@@ -40,13 +43,13 @@ export function HeroSection() {
             <Button size="xl" variant="gradient" className="gap-2 group" asChild>
               <Link href="#popular">
                 <Calculator className="h-5 w-5 group-hover:rotate-12 transition-transform" />
-                Explore Calculators
+                {t.hero.popularTools}
               </Link>
             </Button>
             <Button size="xl" variant="outline" className="gap-2" asChild>
               <Link href="#categories">
                 <TrendingUp className="h-5 w-5" />
-                Browse by Category
+                {t.nav.categories}
               </Link>
             </Button>
           </div>
