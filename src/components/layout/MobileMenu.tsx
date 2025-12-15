@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { useSession, signOut } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { toolsData } from "@/lib/toolsData"
 import { calculatorComponents } from "@/lib/calculatorRegistry"
@@ -13,7 +14,7 @@ import {
   ChevronUp,
   ChevronRight,
   ChevronLeft,
-  HandCoins, TrendingUp, FileText, ArrowLeftRight, Landmark, PieChart, Calculator, Ruler, Utensils, Activity, Shapes, BarChart, Clock, GraduationCap, ClipboardCheck, Wifi, Shield, HardDrive, Atom, FlaskConical, Rocket, Microscope, User, Home, Car, Briefcase, Coins, Bike, FastForward, CheckCircle, Percent, Calendar, Scale, ArrowUp, RotateCw, Umbrella, PiggyBank, TrendingDown, Banknote, Wallet, Gift, Receipt, CalendarCheck, Globe, Bitcoin, Ship, Send, Flame, Droplets, HeartPulse, Moon, Apple, Dumbbell, Brain, Sigma, Hourglass, ShoppingCart, Tag, CreditCard
+  HandCoins, TrendingUp, FileText, ArrowLeftRight, Landmark, PieChart, Calculator, Ruler, Utensils, Activity, Shapes, BarChart, Clock, GraduationCap, ClipboardCheck, Wifi, Shield, HardDrive, Atom, FlaskConical, Rocket, Microscope, User, Home, Car, Briefcase, Coins, Bike, FastForward, CheckCircle, Percent, Calendar, Scale, ArrowUp, RotateCw, Umbrella, PiggyBank, TrendingDown, Banknote, Wallet, Gift, Receipt, CalendarCheck, Globe, Bitcoin, Ship, Send, Flame, Droplets, HeartPulse, Moon, Apple, Dumbbell, Brain, Sigma, Hourglass, ShoppingCart, Tag, CreditCard, LogOut, LogIn
 } from "lucide-react"
 
 // Icon mapping for subcategories
@@ -156,7 +157,7 @@ export function MobileMenu({
   setExpandedSubcategory,
   categories
 }: MobileMenuProps) {
-
+  const { data: session } = useSession()
   const router = useRouter()
   const lastCategoryRef = useRef<string | null>(null)
 
@@ -218,6 +219,52 @@ export function MobileMenu({
               placeholder="Search calculators..."
               className="w-full pl-10 pr-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-[#00D4FF] focus:outline-none transition-all"
             />
+          </div>
+
+          {/* Auth Section */}
+          <div className="p-4 bg-secondary/20 rounded-xl border border-border/50">
+            {session?.user ? (
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#00D4FF] to-[#8B5CF6] flex items-center justify-center text-white font-bold text-lg">
+                    {session.user.name?.charAt(0) || "U"}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium truncate">{session.user.name}</div>
+                    <div className="text-xs text-muted-foreground truncate">{session.user.email}</div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <Link href="/profile" onClick={onClose}>
+                    <Button variant="outline" className="w-full justify-start gap-2" size="sm">
+                      <User className="h-4 w-4" />
+                      Profile
+                    </Button>
+                  </Link>
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start gap-2 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20" 
+                    size="sm"
+                    onClick={() => signOut()}
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Logout
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <div className="text-sm text-muted-foreground text-center">
+                  Sign in to save your calculations and access premium features.
+                </div>
+                <Link href="/login" onClick={onClose}>
+                  <Button className="w-full bg-gradient-to-r from-[#00D4FF] to-[#8B5CF6] text-white border-none hover:opacity-90 gap-2">
+                    <LogIn className="h-4 w-4" />
+                    Login / Register
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Content Area */}
