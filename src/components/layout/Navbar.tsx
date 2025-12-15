@@ -39,10 +39,15 @@ const MobileMenu = dynamic(() => import('./MobileMenu').then(mod => mod.MobileMe
 })
 
 import { SettingsSelector } from "./SettingsSelector"
+import { useSettings } from "@/components/providers/SettingsProvider"
+import { translations, LanguageCode } from "@/lib/translations"
 
 export function Navbar() {
   const pathname = usePathname()
   const { data: session } = useSession()
+  const { language } = useSettings()
+  const t = translations[language.code as LanguageCode] || translations.en
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
@@ -52,18 +57,18 @@ export function Navbar() {
   const isCalculatorPage = pathname?.startsWith('/calculator/')
 
   const navLinks = [
-    { href: "/", label: "Home", icon: Calculator },
-    { href: "/popular", label: "Popular", icon: TrendingUp },
-    { href: "/favorites", label: "Favorites", icon: Heart },
-    { href: "/history", label: "History", icon: History },
-    { href: "/about", label: "About", icon: Info },
-    { href: "/contact", label: "Contact", icon: Phone },
-    { href: "/blog", label: "Blog", icon: PenSquare },
+    { href: "/", label: t.nav.home, icon: Calculator },
+    { href: "/popular", label: t.nav.popular, icon: TrendingUp },
+    { href: "/favorites", label: t.nav.favorites, icon: Heart },
+    { href: "/history", label: t.nav.history, icon: History },
+    { href: "/about", label: t.nav.about, icon: Info },
+    { href: "/contact", label: t.nav.contact, icon: Phone },
+    { href: "/blog", label: t.nav.blog, icon: PenSquare },
   ]
 
   const categories = [
     { 
-      name: "All Calculators", 
+      name: t.nav.allCalculators, 
       count: "300+", 
       href: "#categories",
       icon: Grid3x3,
@@ -71,7 +76,7 @@ export function Navbar() {
       key: "all"
     },
     { 
-      name: "Financial", 
+      name: t.nav.financial, 
       count: 45, 
       href: "#financial",
       icon: DollarSign,
@@ -79,7 +84,7 @@ export function Navbar() {
       key: "financial"
     },
     { 
-      name: "Health & Fitness", 
+      name: t.nav.health, 
       count: 38, 
       href: "#health",
       icon: Heart,
@@ -87,7 +92,7 @@ export function Navbar() {
       key: "health"
     },
     { 
-      name: "Math & Numbers", 
+      name: t.nav.math, 
       count: 52, 
       href: "#math",
       icon: Binary,
@@ -95,7 +100,7 @@ export function Navbar() {
       key: "math"
     },
     { 
-      name: "Date & Time", 
+      name: t.nav.datetime, 
       count: 28, 
       href: "#datetime",
       icon: Calendar,
@@ -243,7 +248,7 @@ export function Navbar() {
               ) : (
                 <Link href="/login">
                   <Button className="hidden md:inline-flex bg-gradient-to-r from-[#00D4FF] to-[#8B5CF6] text-white border-none hover:opacity-90">
-                    Login
+                    {t.nav.login}
                   </Button>
                 </Link>
               )}
