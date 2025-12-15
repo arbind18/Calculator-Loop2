@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { AuthProvider } from '@/components/providers/AuthProvider'
+import { SettingsProvider } from '@/components/providers/SettingsProvider'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import './globals.css'
@@ -106,13 +107,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={inter.className}>
       <body className="min-h-screen antialiased">
         <AuthProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <Navbar />
-              <main className="flex-1 pt-20">{children}</main>
-              <Footer />
-            </div>
-          </ThemeProvider>
+          <SettingsProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <div className="relative flex min-h-screen flex-col">
+                <Navbar />
+                <main className="flex-1 pt-20">{children}</main>
+                <Footer />
+              </div>
+            </ThemeProvider>
+          </SettingsProvider>
         </AuthProvider>
       </body>
     </html>

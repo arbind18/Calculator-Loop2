@@ -38,6 +38,8 @@ const MobileMenu = dynamic(() => import('./MobileMenu').then(mod => mod.MobileMe
   ssr: false
 })
 
+import { SettingsSelector } from "./SettingsSelector"
+
 export function Navbar() {
   const pathname = usePathname()
   const { data: session } = useSession()
@@ -210,6 +212,8 @@ export function Navbar() {
               <Button variant="ghost" size="icon" className="hidden sm:flex hover:text-[#00D4FF]">
                 <Search className="h-5 w-5" />
               </Button>
+
+              <SettingsSelector />
 
               <Button
                 variant="ghost"

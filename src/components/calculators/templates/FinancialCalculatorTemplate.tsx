@@ -514,6 +514,8 @@ export function FinancialCalculatorTemplate({
   )
 }
 
+import { useSettings } from "@/components/providers/SettingsProvider"
+
 interface InputGroupProps {
   label: string
   value: number
@@ -537,6 +539,8 @@ export function InputGroup({
   suffix,
   helpText
 }: InputGroupProps) {
+  const { currency } = useSettings()
+  const displayPrefix = prefix === "₹" ? currency.symbol : prefix
   const [localValue, setLocalValue] = useState(value.toLocaleString('en-IN'))
   const isInternalChange = useRef(false)
 
@@ -583,7 +587,7 @@ export function InputGroup({
           <label className="text-sm font-medium text-foreground/90">{label}</label>
         </div>
         <div className="flex items-center gap-2 bg-secondary/30 border border-transparent hover:border-primary/20 focus-within:border-primary/50 focus-within:ring-4 focus-within:ring-primary/10 rounded-xl px-4 py-3 transition-all w-full sm:w-auto">
-          {prefix && <span className="text-muted-foreground font-medium select-none text-lg">{prefix}</span>}
+          {displayPrefix && <span className="text-muted-foreground font-medium select-none text-lg">{displayPrefix}</span>}
           <input
             type="text"
             inputMode="decimal"
@@ -634,6 +638,9 @@ interface ResultCardProps {
 }
 
 export function ResultCard({ label, value, subtext, type = "default", icon: Icon, prefix, suffix }: ResultCardProps) {
+  const { currency } = useSettings()
+  const displayPrefix = prefix === "₹" ? currency.symbol : prefix
+
   const styles = {
     default: "bg-card border-border/50 text-foreground hover:border-primary/20",
     highlight: "bg-primary/5 border-primary/20 text-primary hover:bg-primary/10",
@@ -653,7 +660,7 @@ export function ResultCard({ label, value, subtext, type = "default", icon: Icon
         "font-bold tracking-tight break-words w-full px-2",
         isVeryLong ? "text-lg md:text-xl" : isLong ? "text-2xl md:text-3xl" : "text-3xl md:text-4xl"
       )}>
-        {prefix}{value}{suffix}
+        {displayPrefix}{value}{suffix}
       </p>
       {subtext && <p className="text-xs opacity-70 font-medium bg-background/50 px-2 py-1 rounded-full">{subtext}</p>}
     </div>
