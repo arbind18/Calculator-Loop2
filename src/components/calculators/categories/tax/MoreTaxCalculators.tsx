@@ -25,55 +25,51 @@ export function PFCalculator() {
       icon={PiggyBank}
       calculate={calculate}
       seoContent={<RetirementSeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup
-          label="Basic Salary (monthly)"
-          value={basic}
-          onChange={setBasic}
-          min={10000}
-          max={200000}
-          step={1000}
-          prefix="₹"
-        />
-        <InputGroup
-          label="Service Years"
-          value={years}
-          onChange={setYears}
-          min={1}
-          max={40}
-          step={1}
-          suffix="years"
-        />
-      </div>
-
-      {result && (
+      inputs={
+        <div className="space-y-6">
+          <InputGroup
+            label="Basic Salary (monthly)"
+            value={basic}
+            onChange={setBasic}
+            min={10000}
+            max={200000}
+            step={1000}
+            prefix="₹"
+          />
+          <InputGroup
+            label="Service Years"
+            value={years}
+            onChange={setYears}
+            min={1}
+            max={40}
+            step={1}
+            suffix="years"
+          />
+        </div>
+      }
+      result={result && (
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <ResultCard
             label="Maturity Amount"
-            value={result.maturity}
+            value={`₹${result.maturity.toLocaleString()}`}
             type="success"
-            prefix="₹"
           />
           <ResultCard
             label="Total Contribution"
-            value={result.total}
+            value={`₹${result.total.toLocaleString()}`}
             type="highlight"
-            prefix="₹"
           />
           <ResultCard
             label="Interest Earned"
-            value={result.interest}
-            prefix="₹"
+            value={`₹${result.interest.toLocaleString()}`}
           />
           <ResultCard
             label="Monthly Contribution"
-            value={result.monthly}
-            prefix="₹"
+            value={`₹${result.monthly.toLocaleString()}`}
           />
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }
 
@@ -98,36 +94,35 @@ export function GratuityCalculator() {
       icon={Calculator}
       calculate={calculate}
       seoContent={<GratuitySeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup
-          label="Last Drawn Basic Salary"
-          value={basic}
-          onChange={setBasic}
-          min={10000}
-          max={200000}
-          step={1000}
-          prefix="₹"
-        />
-        <InputGroup
-          label="Years of Service"
-          value={years}
-          onChange={setYears}
-          min={1}
-          max={40}
-          step={1}
-          suffix="years"
-        />
-      </div>
-
-      {result && (
+      inputs={
+        <div className="space-y-6">
+          <InputGroup
+            label="Last Drawn Basic Salary"
+            value={basic}
+            onChange={setBasic}
+            min={10000}
+            max={200000}
+            step={1000}
+            prefix="₹"
+          />
+          <InputGroup
+            label="Years of Service"
+            value={years}
+            onChange={setYears}
+            min={1}
+            max={40}
+            step={1}
+            suffix="years"
+          />
+        </div>
+      }
+      result={result && (
         <div className="mt-8">
           {result.eligible ? (
             <ResultCard
               label="Gratuity Amount"
-              value={result.gratuity}
+              value={`₹${result.gratuity.toLocaleString()}`}
               type="success"
-              prefix="₹"
               subtext="Formula: (Basic × Years × 15) / 26"
             />
           ) : (
@@ -138,7 +133,7 @@ export function GratuityCalculator() {
           )}
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }
 
@@ -167,55 +162,52 @@ export function TDSCalculator() {
       icon={Calculator}
       calculate={calculate}
       seoContent={<IncomeTaxSeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup
-          label="Income Amount"
-          value={income}
-          onChange={setIncome}
-          min={10000}
-          max={1000000}
-          step={1000}
-          prefix="₹"
-        />
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Income Category</label>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="w-full p-3 rounded-lg bg-background border"
-          >
-            <option value="salary">Salary</option>
-            <option value="professional">Professional Fees</option>
-            <option value="interest">Interest Income</option>
-            <option value="rent">Rent</option>
-            <option value="commission">Commission</option>
-          </select>
+      inputs={
+        <div className="space-y-6">
+          <InputGroup
+            label="Income Amount"
+            value={income}
+            onChange={setIncome}
+            min={10000}
+            max={1000000}
+            step={1000}
+            prefix="₹"
+          />
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Income Category</label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full p-3 rounded-lg bg-background border"
+            >
+              <option value="salary">Salary</option>
+              <option value="professional">Professional Fees</option>
+              <option value="interest">Interest Income</option>
+              <option value="rent">Rent</option>
+              <option value="commission">Commission</option>
+            </select>
+          </div>
         </div>
-      </div>
-
-      {result && (
+      }
+      result={result && (
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           <ResultCard
             label="Net Amount"
-            value={result.net}
+            value={`₹${result.net.toLocaleString()}`}
             type="success"
-            prefix="₹"
           />
           <ResultCard
             label="TDS Deducted"
-            value={result.tds}
+            value={`₹${result.tds.toLocaleString()}`}
             type="warning"
-            prefix="₹"
           />
           <ResultCard
             label="TDS Rate"
-            value={result.rate}
-            suffix="%"
+            value={`${result.rate}%`}
           />
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }
 
@@ -249,48 +241,46 @@ export function ProfessionalTax() {
       icon={Calculator}
       calculate={calculate}
       seoContent={<IncomeTaxSeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup
-          label="Monthly Salary"
-          value={salary}
-          onChange={setSalary}
-          min={5000}
-          max={200000}
-          step={1000}
-          prefix="₹"
-        />
-        <div className="space-y-2">
-          <label className="text-sm font-medium">State</label>
-          <select
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            className="w-full p-3 rounded-lg bg-background border"
-          >
-            <option value="maharashtra">Maharashtra</option>
-            <option value="karnataka">Karnataka</option>
-            <option value="west-bengal">West Bengal</option>
-          </select>
+      inputs={
+        <div className="space-y-6">
+          <InputGroup
+            label="Monthly Salary"
+            value={salary}
+            onChange={setSalary}
+            min={5000}
+            max={200000}
+            step={1000}
+            prefix="₹"
+          />
+          <div className="space-y-2">
+            <label className="text-sm font-medium">State</label>
+            <select
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              className="w-full p-3 rounded-lg bg-background border"
+            >
+              <option value="maharashtra">Maharashtra</option>
+              <option value="karnataka">Karnataka</option>
+              <option value="west-bengal">West Bengal</option>
+            </select>
+          </div>
         </div>
-      </div>
-
-      {result && (
+      }
+      result={result && (
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <ResultCard
             label="Monthly PT"
-            value={result.monthly}
+            value={`₹${result.monthly.toLocaleString()}`}
             type="warning"
-            prefix="₹"
           />
           <ResultCard
             label="Annual PT"
-            value={result.annual}
+            value={`₹${result.annual.toLocaleString()}`}
             type="warning"
-            prefix="₹"
           />
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }
 
@@ -330,52 +320,47 @@ export function AdvanceTaxCalculator() {
       icon={Calculator}
       calculate={calculate}
       seoContent={<IncomeTaxSeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup
-          label="Estimated Annual Income"
-          value={income}
-          onChange={setIncome}
-          min={100000}
-          max={5000000}
-          step={10000}
-          prefix="₹"
-        />
-      </div>
-
-      {result && (
+      inputs={
+        <div className="space-y-6">
+          <InputGroup
+            label="Estimated Annual Income"
+            value={income}
+            onChange={setIncome}
+            min={100000}
+            max={5000000}
+            step={10000}
+            prefix="₹"
+          />
+        </div>
+      }
+      result={result && (
         <div className="mt-8 space-y-4">
           <ResultCard
             label="Total Tax Liability"
-            value={result.total}
+            value={`₹${result.total.toLocaleString()}`}
             type="warning"
-            prefix="₹"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <ResultCard
               label="Q1 (by June 15)"
-              value={result.q1}
-              prefix="₹"
+              value={`₹${result.q1.toLocaleString()}`}
             />
             <ResultCard
               label="Q2 (by Sep 15)"
-              value={result.q2}
-              prefix="₹"
+              value={`₹${result.q2.toLocaleString()}`}
             />
             <ResultCard
               label="Q3 (by Dec 15)"
-              value={result.q3}
-              prefix="₹"
+              value={`₹${result.q3.toLocaleString()}`}
             />
             <ResultCard
               label="Q4 (by Mar 15)"
-              value={result.q4}
-              prefix="₹"
+              value={`₹${result.q4.toLocaleString()}`}
             />
           </div>
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }
 
@@ -414,55 +399,51 @@ export function PostTaxIncome() {
       icon={Calculator}
       calculate={calculate}
       seoContent={<IncomeTaxSeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup
-          label="Annual Income"
-          value={income}
-          onChange={setIncome}
-          min={100000}
-          max={10000000}
-          step={10000}
-          prefix="₹"
-        />
-        <InputGroup
-          label="Deductions (80C, etc.)"
-          value={deductions}
-          onChange={setDeductions}
-          min={0}
-          max={500000}
-          step={5000}
-          prefix="₹"
-        />
-      </div>
-
-      {result && (
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <ResultCard
-            label="Post-Tax Annual Income"
-            value={result.postTax}
-            type="success"
+      inputs={
+        <div className="space-y-6">
+          <InputGroup
+            label="Annual Income"
+            value={income}
+            onChange={setIncome}
+            min={100000}
+            max={10000000}
+            step={10000}
             prefix="₹"
           />
-          <ResultCard
-            label="Monthly In-Hand"
-            value={result.monthly}
-            type="success"
-            prefix="₹"
-          />
-          <ResultCard
-            label="Total Tax Payable"
-            value={result.tax}
-            type="warning"
-            prefix="₹"
-          />
-          <ResultCard
-            label="Taxable Income"
-            value={result.taxable}
+          <InputGroup
+            label="Deductions (80C, etc.)"
+            value={deductions}
+            onChange={setDeductions}
+            min={0}
+            max={500000}
+            step={5000}
             prefix="₹"
           />
         </div>
+      }
+      result={result && (
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <ResultCard
+            label="Post-Tax Annual Income"
+            value={`₹${result.postTax.toLocaleString()}`}
+            type="success"
+          />
+          <ResultCard
+            label="Monthly In-Hand"
+            value={`₹${result.monthly.toLocaleString()}`}
+            type="success"
+          />
+          <ResultCard
+            label="Total Tax Payable"
+            value={`₹${result.tax.toLocaleString()}`}
+            type="warning"
+          />
+          <ResultCard
+            label="Taxable Income"
+            value={`₹${result.taxable.toLocaleString()}`}
+          />
+        </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }

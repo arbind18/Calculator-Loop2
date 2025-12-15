@@ -74,12 +74,21 @@ export function CreditCardPayoff() {
       seoContent={<PersonalLoanSeoContent />}
       inputs={
         <div className="space-y-6">
-          <InputGroup label="Outstanding Balance" value={balance} onChange={setBalance} prefix="₹" />
+          <InputGroup 
+            label="Outstanding Balance" 
+            value={balance} 
+            onChange={setBalance} 
+            prefix="₹" 
+            min={0}
+            max={10000000}
+          />
           <InputGroup 
             label="Interest Rate (APR)" 
             value={interestRate} 
             onChange={setInterestRate} 
             suffix="%" 
+            min={0}
+            max={100}
             helpText="Credit cards usually charge 36% to 42% annually"
           />
           <InputGroup 
@@ -87,6 +96,8 @@ export function CreditCardPayoff() {
             value={monthlyPayment} 
             onChange={setMonthlyPayment} 
             prefix="₹" 
+            min={0}
+            max={balance}
             helpText={`Min due is usually ~₹${Math.round(balance * 0.05)}`}
           />
         </div>

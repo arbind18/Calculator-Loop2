@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { TrendingUp, PieChart as PieChartIcon } from "lucide-react"
 import { FinancialCalculatorTemplate, InputGroup, ResultCard } from "@/components/calculators/templates/FinancialCalculatorTemplate"
+import { ChartToggle } from "@/components/calculators/ui/ChartToggle"
 import { 
   PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend,
   AreaChart, Area, XAxis, YAxis, CartesianGrid
@@ -259,14 +260,14 @@ ${data.map((row: any[]) => `| ${row.join(' | ')} |`).join('\n')}
           </div>
 
           <div className="space-y-8 w-full">
-            <ChartToggle
-              view={chartView}
-              setView={setChartView}
-              options={[
-                { value: 'pie', label: 'Breakdown', icon: PieChartIcon },
-                { value: 'graph', label: 'Growth', icon: TrendingUp }
-              ]}
-            />
+            <ChartToggle 
+          view={chartView}
+          onChange={setChartView}
+          options={[
+            { value: 'pie', label: 'Breakdown', icon: PieChartIcon },
+            { value: 'graph', label: 'Growth', icon: TrendingUp }
+          ]}
+        />
 
             <div className="h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">

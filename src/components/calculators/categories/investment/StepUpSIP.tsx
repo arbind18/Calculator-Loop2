@@ -67,12 +67,41 @@ export function StepUpSIP() {
       inputs={
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputGroup label="Monthly Investment" value={monthlyInvestment} onChange={setMonthlyInvestment} prefix="₹" />
-            <InputGroup label="Annual Step-Up" value={annualStepUp} onChange={setAnnualStepUp} suffix="%" helpText="Increase investment by this % every year" />
+            <InputGroup 
+              label="Monthly Investment" 
+              value={monthlyInvestment} 
+              onChange={setMonthlyInvestment} 
+              prefix="₹" 
+              min={500}
+              max={1000000}
+            />
+            <InputGroup 
+              label="Annual Step-Up" 
+              value={annualStepUp} 
+              onChange={setAnnualStepUp} 
+              suffix="%" 
+              min={0}
+              max={50}
+              helpText="Increase investment by this % every year" 
+            />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputGroup label="Exp. Return Rate" value={returnRate} onChange={setReturnRate} suffix="%" />
-            <InputGroup label="Duration" value={duration} onChange={setDuration} suffix="years" />
+            <InputGroup 
+              label="Exp. Return Rate" 
+              value={returnRate} 
+              onChange={setReturnRate} 
+              suffix="%" 
+              min={1}
+              max={30}
+            />
+            <InputGroup 
+              label="Duration" 
+              value={duration} 
+              onChange={setDuration} 
+              suffix="years" 
+              min={1}
+              max={50}
+            />
           </div>
         </div>
       }

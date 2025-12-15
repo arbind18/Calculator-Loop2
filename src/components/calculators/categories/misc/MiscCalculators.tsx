@@ -42,9 +42,9 @@ export function TipCalculator() {
       }
       result={result && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <ResultCard label="Tip Amount" value={result.tipAmount} prefix="₹" type="default" />
-          <ResultCard label="Total Bill" value={result.total} prefix="₹" type="highlight" />
-          <ResultCard label="Per Person" value={result.perPerson} prefix="₹" type="success" />
+          <ResultCard label="Tip Amount" value={`₹${result.tipAmount}`} type="default" />
+          <ResultCard label="Total Bill" value={`₹${result.total}`} type="highlight" />
+          <ResultCard label="Per Person" value={`₹${result.perPerson}`} type="success" />
         </div>
       )}
     />
@@ -140,7 +140,7 @@ export function DateDifferenceCalculator() {
       icon={CalendarDays}
       calculate={calculate}
       values={[from, to]}
-      seoContent={<DateDiffSeoContent />}
+      seoContent={<DateDifferenceSeoContent />}
       inputs={
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -254,9 +254,9 @@ export function FuelCostCalculator() {
       }
       result={result && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <ResultCard label="Total Cost" value={result.cost} prefix="₹" type="highlight" />
-          <ResultCard label="Fuel Needed" value={result.fuel} suffix="L" type="default" />
-          <ResultCard label="Cost per km" value={result.perKm} prefix="₹" type="default" />
+          <ResultCard label="Total Cost" value={`₹${result.cost}`} type="highlight" />
+          <ResultCard label="Fuel Needed" value={`${result.fuel} L`} type="default" />
+          <ResultCard label="Cost per km" value={`₹${result.perKm}`} type="default" />
         </div>
       )}
     />

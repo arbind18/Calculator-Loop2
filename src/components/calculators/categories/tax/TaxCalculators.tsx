@@ -37,31 +37,31 @@ export function IncomeTaxCalculator() {
       icon={Calculator}
       calculate={calculate}
       seoContent={<IncomeTaxSeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup
-          label="Annual Income"
-          value={income}
-          onChange={setIncome}
-          min={100000}
-          max={10000000}
-          step={10000}
-          prefix="₹"
-        />
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Tax Regime</label>
-          <select
-            value={regime}
-            onChange={(e) => setRegime(e.target.value)}
-            className="w-full p-3 rounded-lg bg-background border"
-          >
-            <option value="new">New Tax Regime</option>
-            <option value="old">Old Tax Regime</option>
-          </select>
+      inputs={
+        <div className="space-y-6">
+          <InputGroup
+            label="Annual Income"
+            value={income}
+            onChange={setIncome}
+            min={100000}
+            max={10000000}
+            step={10000}
+            prefix="₹"
+          />
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Tax Regime</label>
+            <select
+              value={regime}
+              onChange={(e) => setRegime(e.target.value)}
+              className="w-full p-3 rounded-lg bg-background border"
+            >
+              <option value="new">New Tax Regime</option>
+              <option value="old">Old Tax Regime</option>
+            </select>
+          </div>
         </div>
-      </div>
-
-      {result && (
+      }
+      result={result && (
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <ResultCard
             label="Total Tax"
@@ -87,7 +87,7 @@ export function IncomeTaxCalculator() {
           />
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }
 
@@ -118,56 +118,56 @@ export function GSTCalculator() {
       icon={Receipt}
       calculate={calculate}
       seoContent={<GSTSeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup
-          label="Amount"
-          value={amount}
-          onChange={setAmount}
-          min={100}
-          max={10000000}
-          step={100}
-          prefix="₹"
-        />
-        <div className="space-y-2">
-          <label className="text-sm font-medium">GST Rate</label>
-          <select
-            value={gstRate}
-            onChange={(e) => setGstRate(Number(e.target.value))}
-            className="w-full p-3 rounded-lg bg-background border"
-          >
-            <option value="5">5%</option>
-            <option value="12">12%</option>
-            <option value="18">18%</option>
-            <option value="28">28%</option>
-          </select>
-        </div>
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Calculation Type</label>
-          <div className="flex gap-4">
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                checked={type === 'exclusive'}
-                onChange={() => setType('exclusive')}
-                className="accent-primary"
-              />
-              GST Exclusive (Add GST)
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                checked={type === 'inclusive'}
-                onChange={() => setType('inclusive')}
-                className="accent-primary"
-              />
-              GST Inclusive (Remove GST)
-            </label>
+      inputs={
+        <div className="space-y-6">
+          <InputGroup
+            label="Amount"
+            value={amount}
+            onChange={setAmount}
+            min={100}
+            max={10000000}
+            step={100}
+            prefix="₹"
+          />
+          <div className="space-y-2">
+            <label className="text-sm font-medium">GST Rate</label>
+            <select
+              value={gstRate}
+              onChange={(e) => setGstRate(Number(e.target.value))}
+              className="w-full p-3 rounded-lg bg-background border"
+            >
+              <option value="5">5%</option>
+              <option value="12">12%</option>
+              <option value="18">18%</option>
+              <option value="28">28%</option>
+            </select>
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Calculation Type</label>
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  checked={type === 'exclusive'}
+                  onChange={() => setType('exclusive')}
+                  className="accent-primary"
+                />
+                GST Exclusive (Add GST)
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  checked={type === 'inclusive'}
+                  onChange={() => setType('inclusive')}
+                  className="accent-primary"
+                />
+                GST Inclusive (Remove GST)
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-
-      {result && (
+      }
+      result={result && (
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <ResultCard
             label="Total Amount"
@@ -200,7 +200,7 @@ export function GSTCalculator() {
           </div>
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }
 
@@ -227,20 +227,20 @@ export function SalaryBreakup() {
       icon={Calculator}
       calculate={calculate}
       seoContent={<IncomeTaxSeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup
-          label="Annual CTC"
-          value={ctc}
-          onChange={setCtc}
-          min={300000}
-          max={10000000}
-          step={10000}
-          prefix="₹"
-        />
-      </div>
-
-      {result && (
+      inputs={
+        <div className="space-y-6">
+          <InputGroup
+            label="Annual CTC"
+            value={ctc}
+            onChange={setCtc}
+            min={300000}
+            max={10000000}
+            step={10000}
+            prefix="₹"
+          />
+        </div>
+      }
+      result={result && (
         <div className="mt-8 space-y-4">
           <ResultCard
             label="Monthly In-Hand Salary"
@@ -279,7 +279,7 @@ export function SalaryBreakup() {
           </div>
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }
 
@@ -306,52 +306,52 @@ export function HRACalculator() {
       icon={Calculator}
       calculate={calculate}
       seoContent={<HRASeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup
-          label="Basic Salary (monthly)"
-          value={basic}
-          onChange={setBasic}
-          min={10000}
-          max={200000}
-          step={1000}
-          prefix="₹"
-        />
-        <InputGroup
-          label="HRA Received"
-          value={hra}
-          onChange={setHra}
-          min={5000}
-          max={100000}
-          step={1000}
-          prefix="₹"
-        />
-        <InputGroup
-          label="Rent Paid"
-          value={rent}
-          onChange={setRent}
-          min={5000}
-          max={100000}
-          step={1000}
-          prefix="₹"
-        />
-        <div className="space-y-2">
-          <label className="text-sm font-medium">City Type</label>
-          <div className="flex gap-4">
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={metro}
-                onChange={(e) => setMetro(e.target.checked)}
-                className="accent-primary"
-              />
-              Living in Metro City (50%)
-            </label>
+      inputs={
+        <div className="space-y-6">
+          <InputGroup
+            label="Basic Salary (monthly)"
+            value={basic}
+            onChange={setBasic}
+            min={10000}
+            max={200000}
+            step={1000}
+            prefix="₹"
+          />
+          <InputGroup
+            label="HRA Received"
+            value={hra}
+            onChange={setHra}
+            min={5000}
+            max={100000}
+            step={1000}
+            prefix="₹"
+          />
+          <InputGroup
+            label="Rent Paid"
+            value={rent}
+            onChange={setRent}
+            min={5000}
+            max={100000}
+            step={1000}
+            prefix="₹"
+          />
+          <div className="space-y-2">
+            <label className="text-sm font-medium">City Type</label>
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={metro}
+                  onChange={(e) => setMetro(e.target.checked)}
+                  className="accent-primary"
+                />
+                Living in Metro City (50%)
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-
-      {result && (
+      }
+      result={result && (
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <ResultCard
             label="Exempt HRA"
@@ -367,6 +367,6 @@ export function HRACalculator() {
           />
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }

@@ -65,30 +65,30 @@ export function CapitalGainsTax() {
       icon={FileText}
       calculate={calculateTax}
       seoContent={<CapitalGainsSeoContent />}
-    >
-      <div className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <InputGroup label="Sale Price" value={salePrice} onChange={setSalePrice} prefix="₹" min={0} max={100000000} />
-          <InputGroup label="Purchase Price" value={purchasePrice} onChange={setPurchasePrice} prefix="₹" min={0} max={100000000} />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Asset Type</label>
-            <select 
-              className="w-full p-2 rounded-md border bg-background"
-              value={assetType}
-              onChange={(e) => setAssetType(e.target.value as any)}
-            >
-              <option value="equity">Stocks/Equity Funds</option>
-              <option value="property">Real Estate/Property</option>
-              <option value="debt">Debt Funds/Gold</option>
-            </select>
+      inputs={
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <InputGroup label="Sale Price" value={salePrice} onChange={setSalePrice} prefix="₹" min={0} max={100000000} />
+            <InputGroup label="Purchase Price" value={purchasePrice} onChange={setPurchasePrice} prefix="₹" min={0} max={100000000} />
           </div>
-          <InputGroup label="Holding Period" value={holdingPeriod} onChange={setHoldingPeriod} suffix="months" min={0} max={1200} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Asset Type</label>
+              <select 
+                className="w-full p-2 rounded-md border bg-background"
+                value={assetType}
+                onChange={(e) => setAssetType(e.target.value as any)}
+              >
+                <option value="equity">Stocks/Equity Funds</option>
+                <option value="property">Real Estate/Property</option>
+                <option value="debt">Debt Funds/Gold</option>
+              </select>
+            </div>
+            <InputGroup label="Holding Period" value={holdingPeriod} onChange={setHoldingPeriod} suffix="months" min={0} max={1200} />
+          </div>
         </div>
-      </div>
-
-      {result && (
+      }
+      result={result && (
         <div className="mt-8 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <ResultCard
@@ -110,6 +110,6 @@ export function CapitalGainsTax() {
           </div>
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }

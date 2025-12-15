@@ -627,9 +627,12 @@ interface ResultCardProps {
   value: string | number
   subtext?: string
   type?: "default" | "highlight" | "success" | "warning"
+  icon?: LucideIcon
+  prefix?: string
+  suffix?: string
 }
 
-export function ResultCard({ label, value, subtext, type = "default" }: ResultCardProps) {
+export function ResultCard({ label, value, subtext, type = "default", icon: Icon, prefix, suffix }: ResultCardProps) {
   const styles = {
     default: "bg-card border-border/50 text-foreground hover:border-primary/20",
     highlight: "bg-primary/5 border-primary/20 text-primary hover:bg-primary/10",
@@ -643,12 +646,13 @@ export function ResultCard({ label, value, subtext, type = "default" }: ResultCa
 
   return (
     <div className={cn("p-6 rounded-2xl border flex flex-col items-center justify-center text-center space-y-3 transition-all hover:shadow-lg hover:-translate-y-1 duration-300 overflow-hidden", styles[type])}>
+      {Icon && <Icon className="w-8 h-8 mb-1 opacity-80" />}
       <p className="text-sm font-medium opacity-70 uppercase tracking-wider">{label}</p>
       <p className={cn(
         "font-bold tracking-tight break-words w-full px-2",
         isVeryLong ? "text-lg md:text-xl" : isLong ? "text-2xl md:text-3xl" : "text-3xl md:text-4xl"
       )}>
-        {value}
+        {prefix}{value}{suffix}
       </p>
       {subtext && <p className="text-xs opacity-70 font-medium bg-background/50 px-2 py-1 rounded-full">{subtext}</p>}
     </div>

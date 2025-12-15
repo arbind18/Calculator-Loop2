@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Flame, TrendingUp, DollarSign } from "lucide-react"
 import { FinancialCalculatorTemplate, InputGroup, ResultCard } from "@/components/calculators/templates/FinancialCalculatorTemplate"
-import { ChartToggle } from "@/components/calculators/ui/ChartToggle"
 import { 
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend 
 } from "recharts"
@@ -85,16 +84,16 @@ export function FIRECalculator() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputGroup label="Current Age" value={currentAge} onChange={setCurrentAge} min={18} max={80} suffix="yrs" />
-            <InputGroup label="Current Savings" value={currentSavings} onChange={setCurrentSavings} prefix="₹" />
+            <InputGroup label="Current Savings" value={currentSavings} onChange={setCurrentSavings} prefix="₹" min={0} max={100000000} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputGroup label="Monthly Expenses" value={monthlyExpenses} onChange={setMonthlyExpenses} prefix="₹" />
-            <InputGroup label="Monthly Investment" value={monthlyInvestment} onChange={setMonthlyInvestment} prefix="₹" />
+            <InputGroup label="Monthly Expenses" value={monthlyExpenses} onChange={setMonthlyExpenses} prefix="₹" min={1000} max={1000000} />
+            <InputGroup label="Monthly Investment" value={monthlyInvestment} onChange={setMonthlyInvestment} prefix="₹" min={0} max={1000000} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <InputGroup label="Exp. Return" value={returnRate} onChange={setReturnRate} suffix="%" step={0.1} />
-            <InputGroup label="Inflation" value={inflationRate} onChange={setInflationRate} suffix="%" step={0.1} />
-            <InputGroup label="Withdrawal Rate" value={withdrawalRate} onChange={setWithdrawalRate} suffix="%" step={0.1} helpText="Safe rate is usually 3-4%" />
+            <InputGroup label="Exp. Return" value={returnRate} onChange={setReturnRate} suffix="%" step={0.1} min={1} max={20} />
+            <InputGroup label="Inflation" value={inflationRate} onChange={setInflationRate} suffix="%" step={0.1} min={1} max={15} />
+            <InputGroup label="Withdrawal Rate" value={withdrawalRate} onChange={setWithdrawalRate} suffix="%" step={0.1} helpText="Safe rate is usually 3-4%" min={1} max={10} />
           </div>
         </div>
       }

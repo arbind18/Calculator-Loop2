@@ -134,17 +134,17 @@ export function RentVsBuy() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <h3 className="font-semibold text-primary flex items-center gap-2"><Key className="h-4 w-4" /> Buying Details</h3>
-              <InputGroup label="Property Price" value={propertyPrice} onChange={setPropertyPrice} prefix="₹" />
-              <InputGroup label="Down Payment" value={downPaymentPercent} onChange={setDownPaymentPercent} suffix="%" />
-              <InputGroup label="Loan Rate" value={loanRate} onChange={setLoanRate} suffix="%" />
-              <InputGroup label="Appreciation Rate" value={appreciationRate} onChange={setAppreciationRate} suffix="%" helpText="Exp. property growth" />
+              <InputGroup label="Property Price" value={propertyPrice} onChange={setPropertyPrice} prefix="₹" min={100000} max={100000000} />
+              <InputGroup label="Down Payment" value={downPaymentPercent} onChange={setDownPaymentPercent} suffix="%" min={0} max={90} />
+              <InputGroup label="Loan Rate" value={loanRate} onChange={setLoanRate} suffix="%" min={1} max={20} />
+              <InputGroup label="Appreciation Rate" value={appreciationRate} onChange={setAppreciationRate} suffix="%" helpText="Exp. property growth" min={0} max={20} />
             </div>
             <div className="space-y-4">
               <h3 className="font-semibold text-primary flex items-center gap-2"><Home className="h-4 w-4" /> Renting Details</h3>
-              <InputGroup label="Monthly Rent" value={monthlyRent} onChange={setMonthlyRent} prefix="₹" />
-              <InputGroup label="Rent Increase" value={rentIncreaseRate} onChange={setRentIncreaseRate} suffix="%" />
-              <InputGroup label="Inv. Return Rate" value={investmentReturnRate} onChange={setInvestmentReturnRate} suffix="%" helpText="Returns on saved cash" />
-              <InputGroup label="Loan Tenure" value={loanTenure} onChange={setLoanTenure} suffix="yrs" />
+              <InputGroup label="Monthly Rent" value={monthlyRent} onChange={setMonthlyRent} prefix="₹" min={1000} max={500000} />
+              <InputGroup label="Rent Increase" value={rentIncreaseRate} onChange={setRentIncreaseRate} suffix="%" min={0} max={20} />
+              <InputGroup label="Inv. Return Rate" value={investmentReturnRate} onChange={setInvestmentReturnRate} suffix="%" helpText="Returns on saved cash" min={1} max={30} />
+              <InputGroup label="Loan Tenure" value={loanTenure} onChange={setLoanTenure} suffix="yrs" min={1} max={30} />
             </div>
           </div>
         </div>

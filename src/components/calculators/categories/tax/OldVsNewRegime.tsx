@@ -62,17 +62,17 @@ export function OldVsNewRegime() {
       icon={Scale}
       calculate={calculateTax}
       seoContent={<IncomeTaxSeoContent />}
-    >
-      <div className="space-y-6">
-        <InputGroup label="Annual Income" value={income} onChange={setIncome} prefix="₹" min={0} max={100000000} />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <InputGroup label="80C Deductions" value={deductions} onChange={setDeductions} prefix="₹" helpText="PF, PPF, ELSS, LIC" min={0} max={150000} />
-          <InputGroup label="HRA Exemption" value={hra} onChange={setHra} prefix="₹" min={0} max={10000000} />
-          <InputGroup label="Other Deductions" value={otherDeductions} onChange={setOtherDeductions} prefix="₹" helpText="Standard Ded, 80D, etc" min={0} max={10000000} />
+      inputs={
+        <div className="space-y-6">
+          <InputGroup label="Annual Income" value={income} onChange={setIncome} prefix="₹" min={0} max={100000000} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <InputGroup label="80C Deductions" value={deductions} onChange={setDeductions} prefix="₹" helpText="PF, PPF, ELSS, LIC" min={0} max={150000} />
+            <InputGroup label="HRA Exemption" value={hra} onChange={setHra} prefix="₹" min={0} max={10000000} />
+            <InputGroup label="Other Deductions" value={otherDeductions} onChange={setOtherDeductions} prefix="₹" helpText="Standard Ded, 80D, etc" min={0} max={10000000} />
+          </div>
         </div>
-      </div>
-
-      {result && (
+      }
+      result={result && (
         <div className="mt-8 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <ResultCard
@@ -99,6 +99,6 @@ export function OldVsNewRegime() {
           </div>
         </div>
       )}
-    </FinancialCalculatorTemplate>
+    />
   )
 }
