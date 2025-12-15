@@ -79,7 +79,9 @@ export const implementedCalculatorList = [
   'protein-calculator',
   'calories-burned',
   'target-heart-rate',
-  'sleep-calculator'
+  'sleep-calculator',
+  'basic-calculator',
+  'fraction-calculator'
 ]
 
 export const implementedCalculatorIds = new Set(implementedCalculatorList)

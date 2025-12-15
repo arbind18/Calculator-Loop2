@@ -622,6 +622,7 @@ export function InputGroup({
   )
 }
 
+// Updated ResultCardProps
 interface ResultCardProps {
   label: string
   value: string | number

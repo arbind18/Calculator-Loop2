@@ -112,6 +112,10 @@ export const calculatorComponents: Record<string, any> = {
   'calories-burned': dynamic(() => import('@/components/calculators/categories/health/HealthCalculators').then(m => ({ default: m.CaloriesBurnedCalculator }))),
   'target-heart-rate': dynamic(() => import('@/components/calculators/categories/health/HealthCalculators').then(m => ({ default: m.TargetHeartRateCalculator }))),
   'sleep-calculator': dynamic(() => import('@/components/calculators/categories/health/HealthCalculators').then(m => ({ default: m.SleepCalculator }))),
+
+  // Math Calculators
+  'basic-calculator': dynamic(() => import('@/components/calculators/categories/math/BasicArithmetic').then(m => ({ default: m.BasicCalculator }))),
+  'fraction-calculator': dynamic(() => import('@/components/calculators/categories/math/BasicArithmetic').then(m => ({ default: m.FractionCalculator }))),
 }
 
 export const implementedCalculatorIds = new Set(Object.keys(calculatorComponents))
